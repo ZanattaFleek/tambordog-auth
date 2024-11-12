@@ -1,5 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Roles } from './auth/roles.decorator';
 
 @Controller()
 export class AppController {
@@ -9,7 +10,8 @@ export class AppController {
   }
 
   @Post('Usuario')
-  Usuario(@Body() { usuario }: { usuario: string }): string {
+  @Roles({ modulo: 'Cadastro de Usuário', permissao: 'Consultar Usuário' })
+  Usuario(@Body() { usuario }: { usuario: string }): Record<string, string> {
 
     console.log('[AppController] - Usuario')
     return this.appService.getUsuario(usuario);
