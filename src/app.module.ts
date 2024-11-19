@@ -6,10 +6,11 @@ import { RequestContextService } from './contexto/RequestContext.service';
 import { AutenticacaoMiddleware } from './auth/autenticacao.middleware';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
+import { LoginUsuarioController } from './controller/loginUsuario.controller';
 
 @Module({
   imports: [GlobalContextModule],
-  controllers: [AppController],
+  controllers: [AppController, LoginUsuarioController],
   providers: [AppService, RequestContextService,
     {
       provide: APP_GUARD,
