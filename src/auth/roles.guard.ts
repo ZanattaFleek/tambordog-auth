@@ -4,7 +4,7 @@ import { Reflector } from '@nestjs/core';
 import { RolesInterface } from './roles.interfaces';
 import { ROLES_KEY } from './roles.decorator';
 import { GlobalContextService } from '../contexto/GlobalContext.service';
-import { RequestContextService } from 'src/contexto/RequestContext.service';
+import { RequestContextService } from '../contexto/RequestContext.service';
 
 @Injectable({scope: Scope.REQUEST})
 export class RolesGuard implements CanActivate {
