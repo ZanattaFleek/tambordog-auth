@@ -5,7 +5,9 @@ import { RespostaPadraoInterface } from "../interfaces/padrao.interfaces";
 @Controller()
 export class LoginUsuarioController {
 
-    constructor() { }
+    constructor() {
+        console.log('[LoginUsuarioController] - Construtor')
+     }
 
     @Post("loginUsuario")
     public loginUsuario(

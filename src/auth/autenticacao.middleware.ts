@@ -1,6 +1,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { RequestContextService } from 'src/contexto/RequestContext.service';
+import { RequestContextService } from '../contexto/RequestContext.service';
+import ClsAutenticacaoMiddleware from './autenticacao.middleware.cls';
 
 @Injectable()
 export class AutenticacaoMiddleware implements NestMiddleware {
@@ -9,13 +10,18 @@ export class AutenticacaoMiddleware implements NestMiddleware {
 
     use(req: Request, res: Response, next: NextFunction) {
 
-        console.log('[Autenticação Middleware] - ');
+        const clsAutenticacaoMiddleware: ClsAutenticacaoMiddleware = new ClsAutenticacaoMiddleware();
 
-        console.log('[Autenticação Middleware] - req.body', req.body)
+        clsAutenticacaoMiddleware.pesquisarToken(req.headers.authorization).then(rs => {
 
-        this.requestContextService.usuarioRequest = 'Usuário Request Alterado no Middleware'
+            this.requestContextService.usuarioAtual = rs
+            // console.log('Dentro do RS', rs)
+            next();
+        })
 
-        next();
+        // console.log('[Autenticação Middleware] - ');
+
+        // console.log('[Autenticação Middleware] - req.body', req.headers.authorization)
 
     }
 }

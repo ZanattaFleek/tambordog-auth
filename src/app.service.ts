@@ -17,11 +17,11 @@ export class AppService {
 
     let retorno = {
       usuarioGlobal: this.globalContext.usuarioGlobal,
-      usuarioRequest: this.requestContext.usuarioRequest
+      usuarioRequest: this.requestContext.usuarioAtual
     }
 
     this.globalContext.usuarioGlobal = usuario
-    this.requestContext.usuarioRequest = usuario
+    this.requestContext.usuarioAtual = usuario
 
     return retorno
   }

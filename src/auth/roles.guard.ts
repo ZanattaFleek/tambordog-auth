@@ -6,7 +6,7 @@ import { ROLES_KEY } from './roles.decorator';
 import { GlobalContextService } from '../contexto/GlobalContext.service';
 import { RequestContextService } from '../contexto/RequestContext.service';
 
-@Injectable({scope: Scope.REQUEST})
+@Injectable({ scope: Scope.REQUEST })
 export class RolesGuard implements CanActivate {
     constructor(
         private reflector: Reflector,
@@ -26,11 +26,14 @@ export class RolesGuard implements CanActivate {
 
         console.log('[RolesGuard] - Contexto Global Usuário: ', this.globalContext.usuarioGlobal)
 
-        console.log('[RolesGuard] - Contexto Request Usuário: ', this.requestContext.usuarioRequest)
-
+        console.log('[RolesGuard] - Contexto Request Usuário: ', this.requestContext.usuarioAtual)
+        
         if (!requiredRoles) {
             return true
         }
+        
+        const request = context.switchToHttp().getRequest();
+        console.log('[RolesGuard] - Request Headers: ', request.headers.authorization)
 
         // const { usuario } = context.switchToHttp().getRequest();
 

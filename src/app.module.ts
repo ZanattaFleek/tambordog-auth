@@ -7,10 +7,11 @@ import { AutenticacaoMiddleware } from './auth/autenticacao.middleware';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
 import { LoginUsuarioController } from './controller/loginUsuario.controller';
+import { SomarController } from './controller/somar.controller';
 
 @Module({
   imports: [GlobalContextModule],
-  controllers: [AppController, LoginUsuarioController],
+  controllers: [AppController, LoginUsuarioController, SomarController],
   providers: [AppService, RequestContextService,
     {
       provide: APP_GUARD,

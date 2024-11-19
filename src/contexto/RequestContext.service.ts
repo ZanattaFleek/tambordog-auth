@@ -7,6 +7,6 @@ export class RequestContextService {
         console.log('[RequestContextService] - Constructor')
     }
 
-    public usuarioRequest: string = 'Valor Inicial Usuário Request'
+    public usuarioAtual: string = ''
 
 }

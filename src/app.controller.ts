@@ -22,7 +22,7 @@ export class AppController {
   Usuario(@Body() { usuario }: { usuario: string }): Record<string, string> {
 
     console.log('[AppController] - Usuario')
-    console.log('[AppController - Usuario Request', this.requestContextService.usuarioRequest)
+    console.log('[AppController - Usuario Request', this.requestContextService.usuarioAtual)
     return this.appService.getUsuario(usuario);
 
   }
