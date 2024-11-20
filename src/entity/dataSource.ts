@@ -1,6 +1,12 @@
 import { DataSource } from "typeorm";
 import Usuario from "./sistema/Usuario";
 import UsuarioSessao from "./sistema/UsuarioSessao";
+import Grupo from "./sistema/Grupo";
+import GrupoUsuario from "./sistema/GrupoUsuario";
+import GrupoPermissao from "./sistema/GrupoPermissao";
+import UsuarioPermissao from "./sistema/UsuarioPermissao";
+import Modulo from "./sistema/Modulo";
+import ModuloPermissao from "./sistema/ModuloPermissao";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -12,8 +18,14 @@ export const AppDataSource = new DataSource({
   synchronize: true,
   logging: false,
   entities: [
+    Grupo,
+    GrupoUsuario,
+    GrupoPermissao,
     Usuario,
-    UsuarioSessao
+    UsuarioPermissao,
+    UsuarioSessao,
+    Modulo,
+    ModuloPermissao
   ],
   subscribers: [],
   migrations: [],

@@ -1,5 +1,5 @@
 import { Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { UsuarioInterface } from '../../interfaces/sistema/usuario.interface';
+import { UsuarioInterface } from '../../interfaces/sistema/usuario.interfaces';
 
 @Entity({ name: 'usuarios' })
 export default class Usuario implements UsuarioInterface {

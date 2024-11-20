@@ -13,3 +13,10 @@ export interface UsuarioSessaoInterface {
     token: string
     ativo: boolean
 }
+
+export interface UsuarioPermissaoInterface {
+    idUsuarioPermissao: string
+    idUsuario: string
+    modulo: string
+    permissao: string
+}
