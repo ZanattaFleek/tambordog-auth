@@ -11,6 +11,6 @@ export interface GrupoUsuarioInterface {
 export interface GrupoPermissaoInterface {
     idGrupoPermissao: string
     idGrupo: string
-    modulo: string
-    permissao: string
+    idModulo: string
+    idModuloPermissao: string
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { UsuarioInterface } from '../../interfaces/sistema/usuario.interfaces';
 
 @Entity({ name: 'usuarios' })
@@ -21,5 +21,11 @@ export default class Usuario implements UsuarioInterface {
 
   @Column({ type: 'int', default: 0 })
   tentativasLogin: number
+
+  @CreateDateColumn({ name: 'createdAt', type: 'timestamp', nullable: false })
+  createAt: Date
+
+  @UpdateDateColumn({ name: 'updatedAt', type: 'timestamp', nullable: false })
+  updateAt: Date
 
 }

@@ -17,6 +17,6 @@ export interface UsuarioSessaoInterface {
 export interface UsuarioPermissaoInterface {
     idUsuarioPermissao: string
     idUsuario: string
-    modulo: string
-    permissao: string
+    idModulo: string
+    idModuloPermissao: string
 }

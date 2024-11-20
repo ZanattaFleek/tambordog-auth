@@ -1,5 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { GrupoPermissaoInterface } from '../../interfaces/sistema/grupo.interfaces';
+import Grupo from './Grupo';
+import Modulo from './Modulo';
+import ModuloPermissao from './ModuloPermissao';
 
 @Entity({ name: 'grupospermissoes' })
 export default class GrupoPermissao implements GrupoPermissaoInterface {
@@ -7,13 +10,25 @@ export default class GrupoPermissao implements GrupoPermissaoInterface {
     @PrimaryGeneratedColumn('uuid')
     idGrupoPermissao: string
 
+    @JoinColumn({ name: 'idGrupo' })
+    @ManyToOne(() => Grupo)
     @Column({ length: 36 })
     idGrupo: string;
 
-    @Column({ length: 255 })
-    modulo: string
+    @JoinColumn({ name: 'idModulo' })
+    @ManyToOne(() => Modulo)
+    @Column({ length: 36 })
+    idModulo: string
 
-    @Column({ length: 255 })
-    permissao: string
-    
+    @JoinColumn({ name: 'idModuloPermissao' })
+    @ManyToOne(() => ModuloPermissao)
+    @Column({ length: 36 })
+    idModuloPermissao: string
+
+    @CreateDateColumn({ name: 'createdAt', type: 'timestamp', nullable: false })
+    createAt: Date
+
+    @UpdateDateColumn({ name: 'updatedAt', type: 'timestamp', nullable: false })
+    updateAt: Date
+
 }
