@@ -17,7 +17,6 @@ export class AppController {
   @Roles({
     modulo: 'Cadastro de Usuário',
     permissao: 'Consultar Usuário',
-    requestContext: (new RequestContextService())
   })
   Usuario(@Body() { usuario }: { usuario: string }): Record<string, string> {
 

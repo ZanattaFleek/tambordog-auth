@@ -1,7 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { GrupoPermissaoInterface } from '../../interfaces/sistema/grupo.interfaces';
 import Grupo from './Grupo';
-import Modulo from './Modulo';
 import ModuloPermissao from './ModuloPermissao';
 
 @Entity({ name: 'grupospermissoes' })
@@ -15,10 +14,12 @@ export default class GrupoPermissao implements GrupoPermissaoInterface {
     @Column({ length: 36 })
     idGrupo: string;
 
+    /*
     @JoinColumn({ name: 'idModulo' })
     @ManyToOne(() => Modulo)
     @Column({ length: 36 })
     idModulo: string
+    */
 
     @JoinColumn({ name: 'idModuloPermissao' })
     @ManyToOne(() => ModuloPermissao)

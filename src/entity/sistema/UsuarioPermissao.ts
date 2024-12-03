@@ -14,12 +14,12 @@ export default class UsuarioPermissao implements UsuarioPermissaoInterface {
     @ManyToOne(() => Usuario)
     @Column({ length: 36 })
     idUsuario: string;
-
+/*
     @JoinColumn({ name: 'idModulo' })
     @ManyToOne(() => Modulo)
     @Column({ length: 36 })
     idModulo: string
-
+*/
     @JoinColumn({ name: 'idModuloPermissao' })
     @ManyToOne(() => ModuloPermissao)
     @Column({ length: 36 })

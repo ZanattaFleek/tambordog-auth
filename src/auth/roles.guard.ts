@@ -5,6 +5,7 @@ import { RolesInterface } from './roles.interfaces';
 import { ROLES_KEY } from './roles.decorator';
 import { GlobalContextService } from '../contexto/GlobalContext.service';
 import { RequestContextService } from '../contexto/RequestContext.service';
+import ClsAcesso from './ClsAcesso';
 
 @Injectable({ scope: Scope.REQUEST })
 export class RolesGuard implements CanActivate {
@@ -13,31 +14,35 @@ export class RolesGuard implements CanActivate {
         private readonly globalContext: GlobalContextService,
         private readonly requestContext: RequestContextService,
     ) {
-        console.log('[RolesGuard] - Construtor')
+        // console.log('[RolesGuard] - Construtor')
     }
 
-    canActivate(context: ExecutionContext): boolean {
+    canActivate(context: ExecutionContext): Promise<boolean> {
         const requiredRoles = this.reflector.getAllAndOverride<RolesInterface>(ROLES_KEY, [
             context.getHandler(),
             context.getClass(),
         ])
 
-        console.log('[RolesGuard] - Regra Recebida: ', requiredRoles)
+        // console.log('[RolesGuard] - Regra Recebida: ', requiredRoles)
 
-        console.log('[RolesGuard] - Contexto Global Usuário: ', this.globalContext.usuarioGlobal)
+        // console.log('[RolesGuard] - Contexto Global Usuário: ', this.globalContext.usuarioGlobal)
 
-        console.log('[RolesGuard] - Contexto Request Usuário: ', this.requestContext.usuarioAtual)
-        
+        // console.log('[RolesGuard] - Contexto Request Usuário: ', this.requestContext.usuarioAtual)
+
         if (!requiredRoles) {
-            return true
+            return Promise.resolve(true)
         }
-        
+
         const request = context.switchToHttp().getRequest();
-        console.log('[RolesGuard] - Request Headers: ', request.headers.authorization)
+        // console.log('[RolesGuard] - Request Headers: ', request.headers.authorization)
 
         // const { usuario } = context.switchToHttp().getRequest();
 
-        return true
+        const clsAcesso: ClsAcesso = new ClsAcesso()
+
+        return clsAcesso.checarAcesso(this.requestContext.usuarioAtual, requiredRoles.modulo, requiredRoles.permissao).then(rs => {
+            return rs
+        })
 
     }
 }
