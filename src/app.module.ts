@@ -8,9 +8,14 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/roles.guard';
 import { LoginUsuarioController } from './controller/loginUsuario.controller';
 import { SomarController } from './controller/somar.controller';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [GlobalContextModule],
+  imports: [GlobalContextModule, ConfigModule.forRoot(
+    {
+      envFilePath: '.env',
+    }
+  )],
   controllers: [AppController, LoginUsuarioController, SomarController],
   providers: [AppService, RequestContextService,
     {

@@ -10,7 +10,7 @@ export interface PermissoesTypesInterface {
     ATLETA: {
         MODULO: string
         PERMISSOES: {
-            INCLUSAO: string
+            MANUTENCAO: string
         }
     },
 }
@@ -27,7 +27,7 @@ export const PermissoesTypes: PermissoesTypesInterface = {
     ATLETA: {
         MODULO: 'Cadastro de Atletas',
         PERMISSOES: {
-            INCLUSAO: 'Incluir Atleta'
+            MANUTENCAO: 'Manutenção de Cadastro de Atleta'
         }
     },
 

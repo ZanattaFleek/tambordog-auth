@@ -10,7 +10,7 @@ export class AppService {
     private readonly globalContext: GlobalContextService,
     private readonly requestContext: RequestContextService
   ) {
-    console.log('[AppService] - Constructor')
+    console.log('[AppService] - Constructor')    
   }
 
   getUsuario(usuario: string): Record<string, string> {
