@@ -3,7 +3,7 @@ import { Injectable, CanActivate, ExecutionContext, Scope } from '@nestjs/common
 import { Reflector } from '@nestjs/core';
 import { RolesInterface } from './roles.interfaces';
 import { ROLES_KEY } from './roles.decorator';
-import { GlobalContextService } from '../contexto/GlobalContext.service';
+// import { GlobalContextService } from '../contexto/GlobalContext.service';
 import { RequestContextService } from '../contexto/RequestContext.service';
 import ClsAcesso from './ClsAcesso';
 
@@ -11,7 +11,7 @@ import ClsAcesso from './ClsAcesso';
 export class RolesGuard implements CanActivate {
     constructor(
         private reflector: Reflector,
-        private readonly globalContext: GlobalContextService,
+        // private readonly globalContext: GlobalContextService,
         private readonly requestContext: RequestContextService,
     ) {
         // console.log('[RolesGuard] - Construtor')
@@ -33,7 +33,7 @@ export class RolesGuard implements CanActivate {
             return Promise.resolve(true)
         }
 
-        const request = context.switchToHttp().getRequest();
+        // const request = context.switchToHttp().getRequest();
         // console.log('[RolesGuard] - Request Headers: ', request.headers.authorization)
 
         // const { usuario } = context.switchToHttp().getRequest();

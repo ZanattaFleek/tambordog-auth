@@ -1,13 +1,15 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import ClsLoginUsuarioController from "./loginUsuario.controller.cls";
 import { RespostaPadraoInterface } from "../interfaces/padrao.interfaces";
+import { PermissoesTypesInterface } from "src/types/PermissoesTypes";
+import { RequestContextService } from "../contexto/RequestContext.service";
 
 @Controller()
 export class LoginUsuarioController {
 
-    constructor() {
+    constructor(private readonly requestContext: RequestContextService) {
         console.log('[LoginUsuarioController] - Construtor')
-     }
+    }
 
     @Post("loginUsuario")
     public loginUsuario(
@@ -17,6 +19,16 @@ export class LoginUsuarioController {
 
         return new ClsLoginUsuarioController().logar(cpf, senha)
 
+
+    }
+
+    @Post("permissoesUsuario")
+    public permissoesUsuario(): Promise<PermissoesTypesInterface> {
+        if (this.requestContext.usuarioAtual) {
+            return new ClsLoginUsuarioController().permissoesUsuario(this.requestContext.usuarioAtual)
+        } else {
+            return Promise.reject()
+        }
 
     }
 
