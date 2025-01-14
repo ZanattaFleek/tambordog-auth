@@ -16,6 +16,9 @@ export default class Usuario implements UsuarioInterface {
   @Column({ length: 25 })
   senha: string
 
+  @Column({ length: 1, type: 'char' })
+  perfil: 'A' | 'U'
+
   @Column({ nullable: true })
   ativo: boolean
 

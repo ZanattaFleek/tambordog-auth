@@ -1,8 +1,8 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import ClsLoginUsuarioController from "./loginUsuario.controller.cls";
 import { RespostaPadraoInterface } from "../interfaces/padrao.interfaces";
-import { PermissoesTypesInterface } from "src/types/PermissoesTypes";
 import { RequestContextService } from "../contexto/RequestContext.service";
+import { LoginInterface } from "../interfaces/login.interfaces";
 
 @Controller()
 export class LoginUsuarioController {
@@ -15,13 +15,14 @@ export class LoginUsuarioController {
     public loginUsuario(
         @Body("cpf") cpf: string,
         @Body("senha") senha: string
-    ): Promise<RespostaPadraoInterface<String>> {
+    ): Promise<RespostaPadraoInterface<LoginInterface>> {
 
         return new ClsLoginUsuarioController().logar(cpf, senha)
 
 
     }
 
+    /*
     @Post("permissoesUsuario")
     public permissoesUsuario(): Promise<PermissoesTypesInterface> {
         if (this.requestContext.usuarioAtual) {
@@ -31,5 +32,6 @@ export class LoginUsuarioController {
         }
 
     }
+        */
 
 }

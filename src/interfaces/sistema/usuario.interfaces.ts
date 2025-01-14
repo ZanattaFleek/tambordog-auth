@@ -4,6 +4,7 @@ export interface UsuarioInterface {
     cpf: string
     senha: string
     ativo: boolean
+    perfil: 'A' | 'U'
     tentativasLogin: number
 }
 

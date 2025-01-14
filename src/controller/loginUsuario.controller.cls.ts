@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { RespostaPadraoInterface } from "../interfaces/padrao.interfaces";
 import { AppDataSource } from "../entity/dataSource";
 import { PermissoesTypes, PermissoesTypesInterface } from "../types/PermissoesTypes";
+import { LoginInterface } from "../interfaces/login.interfaces";
 
 interface rsSqlPermissaoPorUsuario {
     modulo: string
@@ -33,12 +34,16 @@ const SQL_PERMISSAO_POR_USUARIO = `
 
 export default class ClsLoginUsuarioController {
 
-    public logar(cpf: string, senha: string): Promise<RespostaPadraoInterface<String>> {
+    public logar(cpf: string, senha: string): Promise<RespostaPadraoInterface<LoginInterface>> {
 
-        let retorno: RespostaPadraoInterface<String> = {
+        let retorno: RespostaPadraoInterface<LoginInterface> = {
             ok: false,
             mensagem: 'Erro no Login',
-            dados: ''
+            dados: {
+                perfil: 'U',
+                permissoes: PermissoesTypes,
+                token: ''
+            }
         }
 
         return this.fecharSessoesEmAberto(cpf).then((rsUsuarioExistente) => {
@@ -58,10 +63,18 @@ export default class ClsLoginUsuarioController {
                                 token: token
                             }).then(() => {
                                 // return AppDataSource.destroy().then(() => {
-                                retorno.ok = true
-                                retorno.mensagem = 'Login Realizado'
-                                retorno.dados = token
-                                return retorno
+
+                                return this.permissoesUsuario(rsUsuarioLogado.idUsuario).then((rsPermissoes) => {
+                                    return {
+                                        ok: true,
+                                        mensagem: 'Login Realizado',
+                                        dados: {
+                                            perfil: rsUsuarioLogado.perfil,
+                                            permissoes: rsPermissoes,
+                                            token: token
+                                        }
+                                    }
+                                })
                                 // })
                             })
 
@@ -103,7 +116,7 @@ export default class ClsLoginUsuarioController {
         })
     }
 
-    public permissoesUsuario(idUsuario: string): Promise<PermissoesTypesInterface> {
+    private permissoesUsuario(idUsuario: string): Promise<PermissoesTypesInterface> {
 
         return AppDataSource.query<Array<rsSqlPermissaoPorUsuario>>(SQL_PERMISSAO_POR_USUARIO, [idUsuario, idUsuario]).then((rsPermissoes) => {
 
