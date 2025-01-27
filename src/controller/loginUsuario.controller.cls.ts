@@ -42,7 +42,8 @@ export default class ClsLoginUsuarioController {
             dados: {
                 perfil: 'U',
                 permissoes: PermissoesTypes,
-                token: ''
+                token: '',
+                nome: ''
             }
         }
 
@@ -60,7 +61,7 @@ export default class ClsLoginUsuarioController {
                             return AppDataSource.getRepository(UsuarioSessao).save({
                                 idUsuario: rsUsuarioLogado.idUsuario,
                                 ativo: true,
-                                token: token
+                                token: token,
                             }).then(() => {
                                 // return AppDataSource.destroy().then(() => {
 
@@ -71,7 +72,8 @@ export default class ClsLoginUsuarioController {
                                         dados: {
                                             perfil: rsUsuarioLogado.perfil,
                                             permissoes: rsPermissoes,
-                                            token: token
+                                            token: token,
+                                            nome: rsUsuarioLogado.nome.split(' ')[0]
                                         }
                                     }
                                 })
